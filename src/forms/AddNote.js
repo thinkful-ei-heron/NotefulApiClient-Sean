@@ -30,9 +30,6 @@ export default class AddNote extends Component {
     }
 
     handleSubmit(e){
-        let date = new Date();
-        let timestamp = date.getTime();
-        console.log(typeof(timestamp));
         e.preventDefault();
         let date = new Date(Date.now());
         let tempObject={
@@ -59,7 +56,7 @@ export default class AddNote extends Component {
 
     generateFolderList() {
         let folderList = this.props.folders.map(folder => {
-            return <option value={folder.id}>{folder.name}</option>
+            return <option key={folder.id} value={folder.id}>{folder.name}</option>
         })
         return folderList;
     }

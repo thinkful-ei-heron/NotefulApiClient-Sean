@@ -1,5 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
