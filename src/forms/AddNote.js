@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { fips } from 'crypto';
+import { format } from 'util';
 
 export default class AddNote extends Component {
 
@@ -45,10 +46,13 @@ export default class AddNote extends Component {
     }
 
     handleSubmit(e){
+        let date = new Date();
+        let timestamp = date.getTime();
+        console.log(typeof(timestamp));
         e.preventDefault();
         let tempObject={
             name:this.state.name,
-            modified:Date.now(),
+            modified:timestamp,
             content:this.state.content,
             folder:this.state.folderName,
 
