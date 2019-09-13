@@ -92,7 +92,7 @@ class App extends Component {
                 <Route path="/add-folder" render={(routeProps) =>
                     <AddFolder renderFolder={this.addFolder} history={routeProps.history} />} />
                 <Route path="/add-note" render={(routeProps) =>
-                    <AddNote renderNote={this.addNote} history={routeProps.history} />} />
+                    <AddNote renderNote={this.addNote} history={routeProps.history} folders={this.state.folders}/>} />
             </>
         );
     }
