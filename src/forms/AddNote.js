@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import { fips } from 'crypto';
-import { format } from 'util';
+import PropTypes from 'prop-types'
+import { format } from 'date-fns'
 
 export default class AddNote extends Component {
 
     state = {
         name:'',
-        folderName:'',
+        folderId:'',
         content:'',
     };
 
@@ -17,32 +17,16 @@ export default class AddNote extends Component {
     }
 
     updateNameState(name){
-        // let newStateObject = {
-        //     value : name
-        //    // touched:true
-        // }
-        //  this.setState({name:newStateObject})
         name = name.trim();
-        console.log(name);
         this.setState({name:name});
     }
 
     updateContentState(content){
-        // let newContentObject = {
-        //     value:content
-        //     //touched:true
-        // }
-        // this.setState({content:newContentObject})
         this.setState({content:content});
     }
 
     updateFolderState(folder){
-        // let newFolderObject = {
-        //     value:folder
-        //     //touched:true
-        // }
-        // this.setState({folder:newFolderObject})
-        this.setState({folder:folder});
+        this.setState({folderId:folder});
     }
 
     handleSubmit(e){
@@ -50,14 +34,14 @@ export default class AddNote extends Component {
         let timestamp = date.getTime();
         console.log(typeof(timestamp));
         e.preventDefault();
+        let date = new Date(Date.now());
         let tempObject={
             name:this.state.name,
-            modified:timestamp,
+            modified: date,
             content:this.state.content,
-            folder:this.state.folderName,
-
+            folderId:this.state.folderId,
         }
-        console.log(tempObject);
+
         fetch('http://localhost:9090/notes', {
             method: 'POST',
             headers: {
@@ -73,6 +57,13 @@ export default class AddNote extends Component {
             })
     }
 
+    generateFolderList() {
+        let folderList = this.props.folders.map(folder => {
+            return <option value={folder.id}>{folder.name}</option>
+        })
+        return folderList;
+    }
+
     render() {
         return (
             <form className="add-note-form" onSubmit={(e) => this.handleSubmit(e)}>
@@ -84,11 +75,17 @@ export default class AddNote extends Component {
                 <label htmlFor="note-content">
                     <textarea type="text" id="note-content" placeholder="enter note content" onChange={(e) => this.updateContentState(e.target.value)} />
                 </label>
-                <label htmlFor="note-folder">
-                    <input type="text" id="note-folder" placeholder="enter a folder name" onChange={(e) => this.updateFolderState(e.target.value)}/>
-                </label>
+
+                <select className="folder-select" onChange={(e) => this.updateFolderState(e.target.value)}>
+                    {this.generateFolderList()}
+                </select>
                 <button type="submit" className="add-folder-submit">Add note</button>
             </form>
         )
     }
+}
+
+AddNote.propTypes = {
+    renderNote: PropTypes.func,
+    history: PropTypes.object,
 }

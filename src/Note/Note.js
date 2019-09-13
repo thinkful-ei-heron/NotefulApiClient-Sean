@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import NotesContext from '../NotesContext'
@@ -31,8 +32,6 @@ class Note extends React.Component {
 
 
   render() {
-
-    // console.log(this.props.match.path);
     return (
       <div className='Note'>
         <h2 className='Note__title'>
@@ -60,6 +59,14 @@ class Note extends React.Component {
       </div>
     )
   }
+}
+
+Note.propTypes = {
+  path: PropTypes.string,
+  history: PropTypes.object,
+  name: PropTypes.string,
+  id: PropTypes.string,
+  modified: PropTypes.string,
 }
 
 

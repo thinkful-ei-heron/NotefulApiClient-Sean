@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class AddFolder extends Component {
     
@@ -49,4 +50,9 @@ export default class AddFolder extends Component {
             </form>
         )
     }
+}
+
+AddFolder.propTypes = {
+    renderFolder: PropTypes.func,
+    history: PropTypes.object,
 }
