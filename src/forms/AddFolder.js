@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 
 export default class AddFolder extends Component {
+    
     state = {
         name: null,
         touched: false
     }
 
+    validateName(){
+        if(!this.state.name){
+            return ("Folder must have a name");
+        }
+    }
+
     updateFolderName(name) {
+        name=name.trim();
         this.setState({ name: name })
     }
 
@@ -33,7 +41,9 @@ export default class AddFolder extends Component {
         return (
             <form className="add-folder-form" onSubmit={(e) => this.handleSubmit(e)}>
                 <label htmlFor="add-folder">
-                    <input type="text" id="add-folder" placeholder="new folder name" onChange={(e) => this.updateFolderName(e.target.value)} />
+                    <p className="error">{this.validateName()}</p> 
+                    <input type="text" id="add-folder" placeholder="new folder name" onChange={(e) => this.updateFolderName(e.target.value)} 
+                    required minLength='3' maxLength='10'/>
                 </label>
                 <button type="submit" className="add-folder-submit" >Add folder</button>
             </form>

@@ -8,6 +8,7 @@ import './Note.css'
 
 class Note extends React.Component {
 
+
   static contextType = NotesContext;
 
   handleDelete(noteId, callback) {
