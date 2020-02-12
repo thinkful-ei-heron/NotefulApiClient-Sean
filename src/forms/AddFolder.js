@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import config from '../config';
+import { API_URL, API_KEY }from '../config';
 import PropTypes from 'prop-types';
 
 export default class AddFolder extends Component {
@@ -24,11 +24,11 @@ export default class AddFolder extends Component {
         event.preventDefault();
         let name = {name: this.state.name};
 
-        fetch(config.API_URL + '/folders', {
+        fetch(API_URL + '/api/folders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${API_KEY}`
 
             },
             body: JSON.stringify(name)

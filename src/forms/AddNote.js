@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import config from '../config'
+import { API_URL, API_KEY } from '../config'
 
 export default class AddNote extends Component {
 
@@ -40,11 +40,11 @@ export default class AddNote extends Component {
         }
         //console.log(tempObject)
 
-        fetch(config.API_URL + '/notes', {
+        fetch(API_URL + '/api/notes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${API_KEY}`
             },
             body: JSON.stringify(tempObject)
         })

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NotesContext from '../NotesContext';
 import { Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import config from '../config';
+import { API_URL, API_KEY } from '../config'
 import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
@@ -27,21 +27,21 @@ class App extends Component {
     }
 
     async componentDidMount() {
-         await fetch(config.API_URL + '/folders', {
+         await fetch(API_URL + '/api/folders', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${API_KEY}`
             },
         })
             .then(res => res.json())
             .then(data => this.setFolders(data))
 
-        await fetch(config.API_URL + '/notes', {
+        await fetch(API_URL + '/api/notes', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${API_KEY}`
             },
         })
             .then(res => res.json())
@@ -54,11 +54,11 @@ class App extends Component {
     }
 
     addFolder = () => {
-        fetch(config.API_URL + '/folders', {
+        fetch(API_URL + '/api/folders', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${API_KEY}`
             },
         })
             .then(res => res.json())
@@ -66,11 +66,11 @@ class App extends Component {
     }
 
     addNote = () => {
-        fetch(config.API_URL + '/notes', {
+        fetch(API_URL + '/api/notes', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
-                'Authorization': `Bearer ${config.API_KEY}`
+                'Authorization': `Bearer ${API_KEY}`
             },
         })
             .then(res => res.json())

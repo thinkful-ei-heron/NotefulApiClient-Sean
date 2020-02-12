@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import config from '../config'
+import { API_URL, API_KEY } from '../config'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import NotesContext from '../NotesContext'
@@ -13,11 +13,11 @@ class Note extends React.Component {
   static contextType = NotesContext;
 
   handleDelete(noteId, callback) {
-    fetch(config.API_URL + `/notes/${noteId}`, {
+    fetch(API_URL + `/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
           'content-type': 'application/json',
-          'Authorization': `Bearer ${config.API_KEY}`
+          'Authorization': `Bearer ${API_KEY}`
       },
     })
     //.then(res => res.json())
