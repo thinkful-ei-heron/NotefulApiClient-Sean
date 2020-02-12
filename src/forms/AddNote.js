@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import { format } from 'date-fns'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import config from '../config'
 
 export default class AddNote extends Component {
 

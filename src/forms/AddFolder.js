@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import config from '../config';
+import PropTypes from 'prop-types';
 
 export default class AddFolder extends Component {
     
