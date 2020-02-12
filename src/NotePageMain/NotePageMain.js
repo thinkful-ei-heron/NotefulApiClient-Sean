@@ -14,13 +14,13 @@ export default class NotePageMain extends React.Component {
                         this.props.match.params.noteId) || {};
     return (
       <section className='NotePageMain'>
-         <Note
+        {note ? <Note
           id={note.id}
           name={note.name}
           modified={note.modified}
           history={this.props.history}
           path={this.props.match.path}
-        />
+        /> : null}
         
         <div className='NotePageMain__content'>
           {note.content && note.content.split(/\n \r|\n/).map((para, i) =>

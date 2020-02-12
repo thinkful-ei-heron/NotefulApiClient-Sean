@@ -12,19 +12,19 @@ class Note extends React.Component {
   static contextType = NotesContext;
 
   handleDelete(noteId, callback) {
-    fetch(`http://localhost:9090/notes/${noteId}`, {
+    fetch(`http://localhost:8000/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${config.API_KEY}`
       },
     })
-    .then(res => res.json())
+    //.then(res => res.json())
     .then(data => {
 
       if (this.props.path === '/note/:noteId') {
         this.props.history.push('/')
       };
-
       callback(noteId);
     })
   }

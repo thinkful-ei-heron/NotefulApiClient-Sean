@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NotesContext from '../NotesContext';
 import { Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import config from '../config';
 import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
@@ -25,20 +26,22 @@ class App extends Component {
         this.setState({ notes: notes })
     }
 
-    componentDidMount() {
-        fetch('http://localhost:9090/folders', {
+    async componentDidMount() {
+         await fetch('http://localhost:8000/api/folders', {
             method: 'GET',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
             },
         })
             .then(res => res.json())
             .then(data => this.setFolders(data))
 
-        fetch('http://localhost:9090/notes', {
+        await fetch('http://localhost:8000/api/notes', {
             method: 'GET',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
             },
         })
             .then(res => res.json())
@@ -51,10 +54,11 @@ class App extends Component {
     }
 
     addFolder = () => {
-        fetch('http://localhost:9090/folders', {
+        fetch('http://localhost:8000/api/folders', {
             method: 'GET',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
             },
         })
             .then(res => res.json())
@@ -62,10 +66,11 @@ class App extends Component {
     }
 
     addNote = () => {
-        fetch('http://localhost:9090/notes', {
+        fetch('http://localhost:8000/api/notes', {
             method: 'GET',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
             },
         })
             .then(res => res.json())
@@ -104,7 +109,7 @@ class App extends Component {
                     <Route
                         exact
                         key={path}
-                        path={path}
+                        path = {path}
                         component={NoteListMain}
                     />
                 ))}

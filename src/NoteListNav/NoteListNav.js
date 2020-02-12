@@ -9,24 +9,36 @@ import './NoteListNav.css'
 export default class NoteListNav extends React.Component {
   static contextType = NotesContext
 
+  // state={
+  //   noteCount=0
+  // }
+
+  // componentDidMount(){
+  //   const { folders, notes } = this.context;
+  // }
+
+  count=(notes, folderId)=>{
+    return(countNotesForFolder(notes, folderId))
+  }
+  
   render() {
     const { folders, notes } = this.context;
     return (
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>
-          {folders.map(folder =>
+          {folders.length>0 ? folders.map(folder =>
             <li key={folder.id}>
               <NavLink
                 className='NoteListNav__folder-link'
                 to={`/folder/${folder.id}`}
               >
                 <span className='NoteListNav__num-notes'>
-                  {countNotesForFolder(notes, folder.id)}
+                  {this.count(notes, folder.id)}
                 </span>
                 {folder.name}
               </NavLink>
             </li>
-          )}
+          ) : null}
         </ul>
         <div className='NoteListNav__button-wrapper'>
           <CircleButton
@@ -46,5 +58,6 @@ export default class NoteListNav extends React.Component {
 }
 
 NoteListNav.defaultProps = {
-  folders: []
+  folders: [],
+  notes:[],
 }

@@ -32,22 +32,23 @@ export default class AddNote extends Component {
     handleSubmit(e){
         e.preventDefault();
         let date = new Date(Date.now());
-        let tempObject={
+        let tempObject= {
             name:this.state.name,
             modified: date,
+            folder_id:this.state.folderId,
             content:this.state.content,
-            folderId:this.state.folderId,
         }
+        //console.log(tempObject)
 
-        fetch('http://localhost:9090/notes', {
+        fetch('http://localhost:8000/api/notes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
-
+                'Authorization': `Bearer ${config.API_KEY}`
             },
             body: JSON.stringify(tempObject)
         })
-            .then(res => res.json())
+            .then(res => res.json()) 
             .then(data => {
                 this.props.renderNote();
                 this.props.history.push('/');
@@ -55,9 +56,14 @@ export default class AddNote extends Component {
     }
 
     generateFolderList() {
-        let folderList = this.props.folders.map(folder => {
-            return <option key={folder.id} value={folder.id}>{folder.name}</option>
-        })
+        
+        let newArray = this.props.folders
+        let temp = []
+        temp.push(<option key='-1' value="" disabled selected>Choose</option>)
+        temp.push.apply(temp, newArray)
+        let folderList = temp.map((folder, index) => {
+            return <option key={index} value={folder.id}>{folder.name}</option>
+        }) 
         return folderList;
     }
 
@@ -73,7 +79,7 @@ export default class AddNote extends Component {
                     <textarea type="text" id="note-content" placeholder="enter note content" onChange={(e) => this.updateContentState(e.target.value)} />
                 </label>
 
-                <select className="folder-select" onChange={(e) => this.updateFolderState(e.target.value)}>
+                <select selected='' className="folder-select" onChange={(e) => this.updateFolderState(e.target.value)}>
                     {this.generateFolderList()}
                 </select>
                 <button type="submit" className="add-folder-submit">Add note</button>

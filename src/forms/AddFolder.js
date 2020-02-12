@@ -23,15 +23,16 @@ export default class AddFolder extends Component {
         event.preventDefault();
         let name = {name: this.state.name};
 
-        fetch('http://localhost:9090/folders', {
+        fetch('http://localhost:8000/api/folders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
+                'Authorization': `Bearer ${config.API_KEY}`
 
             },
             body: JSON.stringify(name)
         })
-            .then(res => res.json())
+            //.then(res => res.json())
             .then(data => {
                 this.props.renderFolder();
                 this.props.history.push('/');
