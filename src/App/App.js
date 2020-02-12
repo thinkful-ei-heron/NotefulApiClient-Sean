@@ -27,7 +27,7 @@ class App extends Component {
     }
 
     async componentDidMount() {
-         await fetch('http://localhost:8000/api/folders', {
+         await fetch(config.API_URL + '/folders', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -37,7 +37,7 @@ class App extends Component {
             .then(res => res.json())
             .then(data => this.setFolders(data))
 
-        await fetch('http://localhost:8000/api/notes', {
+        await fetch(config.API_URL + '/notes', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -54,7 +54,7 @@ class App extends Component {
     }
 
     addFolder = () => {
-        fetch('http://localhost:8000/api/folders', {
+        fetch(config.API_URL + '/folders', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -66,7 +66,7 @@ class App extends Component {
     }
 
     addNote = () => {
-        fetch('http://localhost:8000/api/notes', {
+        fetch(config.API_URL + '/notes', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',

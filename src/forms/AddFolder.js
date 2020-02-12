@@ -24,7 +24,7 @@ export default class AddFolder extends Component {
         event.preventDefault();
         let name = {name: this.state.name};
 
-        fetch('http://localhost:8000/api/folders', {
+        fetch(config.API_URL + '/folders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

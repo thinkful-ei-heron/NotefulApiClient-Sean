@@ -40,7 +40,7 @@ export default class AddNote extends Component {
         }
         //console.log(tempObject)
 
-        fetch('http://localhost:8000/api/notes', {
+        fetch(config.API_URL + '/notes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

@@ -13,7 +13,7 @@ class Note extends React.Component {
   static contextType = NotesContext;
 
   handleDelete(noteId, callback) {
-    fetch(`http://localhost:8000/api/notes/${noteId}`, {
+    fetch(config.API_URL + `/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
           'content-type': 'application/json',
